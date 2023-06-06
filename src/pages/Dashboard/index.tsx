@@ -48,6 +48,7 @@ export const Dashboard = () => {
     setEditingContact,
     openModal,
     openCreateModal,
+    contacts,
   } = useContact();
   const navigate = useNavigate();
 
@@ -60,6 +61,7 @@ export const Dashboard = () => {
   const [contactName, setContactName] = useState("");
   const [userId, setUserId] = useState("");
   console.log(client);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -114,43 +116,41 @@ export const Dashboard = () => {
             <DownloadButton />
           </DivHeaderContact>
           <h2>Contatos :</h2>
-          {client !== null &&
-            client.map((elem) => (
-              <UlContact key={elem.id}>
-                {elem.contacts.map((el) => (
-                  <li key={el.id}>
-                    <div>
-                      <p>Name: {el.name}</p>
-                      <p>Phone: {el.phone}</p>
-                      <p>E-mail: {el.email}</p>
-                    </div>
-                    <div>
-                      <button
-                        onClick={() => {
-                          openModal(el.id),
-                            setContactId(el.id),
-                            setContactName(el.name);
-                        }}
-                      >
-                        <img src={excluir} alt="excluir" />
-                      </button>
-                      {modalIsOpen && (
-                        <DeleteModal name={contactName} contact={contactId} />
-                      )}
 
-                      <button
-                        onClick={() => {
-                          setEditingContact(el);
-                          openEditModal();
-                        }}
-                      >
-                        <img src={editar} alt="editar" />
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </UlContact>
-            ))}
+          {contacts.map((el) => (
+            <UlContact key={el.id}>
+              <li key={el.id}>
+                <div>
+                  <p>Name: {el.name}</p>
+                  <p>Phone: {el.phone}</p>
+                  <p>E-mail: {el.email}</p>
+                </div>
+                <div>
+                  <button
+                    onClick={() => {
+                      openModal(el.id),
+                        setContactId(el.id),
+                        setContactName(el.name);
+                    }}
+                  >
+                    <img src={excluir} alt="excluir" />
+                  </button>
+                  {modalIsOpen && (
+                    <DeleteModal name={contactName} contact={contactId} />
+                  )}
+
+                  <button
+                    onClick={() => {
+                      setEditingContact(el);
+                      openEditModal();
+                    }}
+                  >
+                    <img src={editar} alt="editar" />
+                  </button>
+                </div>
+              </li>
+            </UlContact>
+          ))}
         </DivContato>
 
         {modalEditIsOpen && <ModalEdit />}
