@@ -117,8 +117,8 @@ export const Dashboard = () => {
           </DivHeaderContact>
           <h2>Contatos :</h2>
 
-          {contacts.map((el) => (
-            <UlContact key={el.id}>
+          <UlContact>
+            {contacts.map((el) => (
               <li key={el.id}>
                 <div>
                   <p>Name: {el.name}</p>
@@ -149,8 +149,8 @@ export const Dashboard = () => {
                   </button>
                 </div>
               </li>
-            </UlContact>
-          ))}
+            ))}
+          </UlContact>
         </DivContato>
 
         {modalEditIsOpen && <ModalEdit />}
